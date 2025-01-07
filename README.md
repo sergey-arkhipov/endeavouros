@@ -117,3 +117,20 @@ Optional Deps   : gvfs-afc: AFC support (Apple mobile devices) [installed]
                   gvfs-wsdd: Web Services Dynamic Discovery support (Windows discovery)
 
 ```
+
+## Vim and Neovim setup
+
+### Vim
+
+- Copy vimrc to .vimrc (or add content)
+- Install Plug [junegunn/vim-plug: :hibiscus: Minimalist Vim Plugin Manager](https://github.com/junegunn/vim-plug)
+- Run :PlugInstall
+
+### Neovim
+
+The following repo made from Lazyvim and adapted for RoR necessarily
+
+- clone repo [sergey-arkhipov/lazyvim_rails: Optionated lazyvim for Rails Development](https://github.com/sergey-arkhipov/lazyvim_rails)
+  to $HOME/.config
+- rename repo to nvim
+- run nvim and add necessary packages
