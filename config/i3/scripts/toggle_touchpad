@@ -1,0 +1,14 @@
+#!/bin/bash
+
+ID=$(xinput list | grep -i touchpad | grep -o 'id=[0-9]*' | cut -d= -f2)
+STATUS=$(xinput list-props "$ID" | grep "Device Enabled" | awk '{print $NF}')
+
+if [ "$STATUS" -eq 1 ]; then
+  xinput set-prop "$ID" "Device Enabled" 0
+  # notify-send -i input-touchpad "Touchpad Disabled"
+  dunstify -t 2000 -r 2593 -u normal -i input-touchpad "Touchpad Disabled"
+else
+  xinput set-prop "$ID" "Device Enabled" 1
+  # notify-send -i input-touchpad "Touchpad Enabled"
+  dunstify -t 2000 -r 2593 -u normal -i input-touchpad "Touchpad Enabled"
+fi
