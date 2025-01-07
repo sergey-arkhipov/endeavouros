@@ -7,6 +7,6 @@ BLUR="5x4"
 
 $SCREENSHOT
 magick $PICTURE -blur $BLUR $PICTURE
-# Add keyboard layout
-i3lock -i $PICTURE --keylayout 1
+# Add keyboard layout to unlock screen
+i3lock -i $PICTURE -k
 rm $PICTURE
