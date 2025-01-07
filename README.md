@@ -168,7 +168,7 @@ RubyVM::YJIT.enabled?
 => true
 ```
 
-### Install additional for development
+### Install additionals for development
 
 ```bash
 # Install valkey as Redis, postgres as database and minio as S3
