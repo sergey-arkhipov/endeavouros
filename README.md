@@ -134,3 +134,50 @@ The following repo made from Lazyvim and adapted for RoR necessarily
   to $HOME/.config
 - rename repo to nvim
 - run nvim and add necessary packages
+
+## Ruby on Rails part
+
+### Install ruby with frum
+
+```bash
+pacman -S --needed base-devel rust libffi libyaml openssl zlib
+yay -S frum-bin # Install frum openssl jemalloc
+frum install 3.4.1 --with-openssl --with-jemalloc --enable-yjit
+
+```
+
+### Install ruby with asdf
+
+```bash
+yay -S asdf-vm
+# Add the following to `~/.zshrc`:
+. /opt/asdf-vm/asdf.sh
+#---
+asdf plugin add ruby
+RUBY_CONFIGURE_OPTS="--with-jemalloc=/usr/lib/libjemalloc.so.2 --enable-yjit" \
+asdf install ruby 3.3.3
+ruby -r rbconfig -e "puts RbConfig::CONFIG['MAINLIBS']"
+-lz -lrt -lrt -ljemalloc -lgmp -ldl -lcrypt -lm -lpthread
+yay -S postgresql-libs
+```
+
+```ruby
+# Check yjit is enabled
+RUBYOPT=--yjit irb
+RubyVM::YJIT.enabled?
+=> true
+```
+
+### Install additional for development
+
+```bash
+# Install valkey as Redis, postgres as database and minio as S3
+docker run  -d --restart unless-stopped --name valkey -p 6379:6379 \
+valkey/valkey
+docker run --restart unless-stopped -d --hostname db --name postgres \
+-p 5432:5432 -e POSTGRES_PASSWORD=password -e LANG=ru_RU.utf8 \
+-e POSTGRES_INITDB_ARGS="--locale-provider=icu --icu-locale=ru-RU" postgres:16-alpine
+docker run -p 9000:9000 -p 9001:9001 -d --restart unless-stopped --name minio \
+quay.io/minio/minio server /data --console-address ":9001"
+
+```
