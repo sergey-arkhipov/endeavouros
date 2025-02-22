@@ -6,7 +6,7 @@ with RoR
 ## Install necessary and helpful packages
 
 `yay -S fzf mc fd ripgrep tree github-cli glab lazygit gitui broot \
-postgresql-libs zsh direnv go ncdu duf vim neovim`
+postgresql-libs zsh direnv go ncdu duf vim neovim zsh-completion neofetch inxi`
 
 | Name            | Description                                                                |
 | --------------- | -------------------------------------------------------------------------- |
@@ -15,6 +15,7 @@ postgresql-libs zsh direnv go ncdu duf vim neovim`
 | duf             | Disk Usage/Free Utility                                                    |
 | fd              | Simple, fast and user-friendly alternative to find                         |
 | fzf             | Command-line fuzzy finder                                                  |
+| inxi            | Command line system information tool                                       |
 | github-cli      | The GitHub CLI                                                             |
 | gitui           | Blazing fast terminal-ui for git written in Rust                           |
 | glab            | Cli tool to help work seamlessly with GitLab from the command line         |
@@ -22,12 +23,14 @@ postgresql-libs zsh direnv go ncdu duf vim neovim`
 | lazygit         | Simple terminal UI for git commands                                        |
 | mc              | A file manager that emulates Norton Commander                              |
 | ncdu            | Disk usage analyzer with an ncurses interface                              |
+| neofetch        | system information tool written in bash 3.2+                               |
 | neovim          | Fork of Vim aiming to improve user experience, plugins, and GUIs           |
 | postgresql-libs | Libraries for use with PostgreSQL                                          |
 | ripgrep         | A search tool that combines the usability of ag with the raw speed of grep |
 | tree            | A directory listing program displaying a depth indented list of files      |
 | vim             | Vi Improved, a highly configurable, improved version of the vi text editor |
 | zsh             | A very advanced and programmable command interpreter (shell) for UNIX      |
+| zsh-completion  | Additional completion definitions for Zsh                                  |
 
 ## Install oh-my-zsh
 
