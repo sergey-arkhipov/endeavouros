@@ -21,8 +21,14 @@ function get_mute {
 
 # Uses regex to get brightness from xbacklight
 function get_brightness {
-  # xbacklight | grep -Po '[0-9]{1,3}' | head -n 1
-  brightnessctl | grep -Po '\(\K[0-9]+' | head -n 1
+case $1 in
+kbd)
+  brightnessctl -d 'smc::kbd_backlight' | grep -Po '\(\K[0-9]+' | head -n 1
+  ;;
+*)
+  brightnessctl  | grep -Po '\(\K[0-9]+' | head -n 1
+  ;;
+esac
 }
 
 # Returns a mute icon, a volume-low icon, or a volume-high icon, depending on the volume
@@ -52,12 +58,12 @@ function show_volume_notif {
 
 # Displays a brightness notification using dunstify
 function show_brightness_notif {
-  brightness=$(get_brightness)
+  brightness=$(get_brightness $1)
   get_brightness_icon
   dunstify -i display-brightness-symbolic -t 1000 -r 2593 -u normal "$brightness_icon $brightness%" -h int:value:$brightness -h string:hlcolor:$bar_color
 }
 
-# Main function - Takes user input, "volume_up", "volume_down", "brightness_up", or "brightness_down"
+# Main function - Takes user input, "volume_up", "volume_down", "brightness_up", or "brightness_down" "kbd_brightness_up", or "kbd_brightness_down"
 case $1 in
 volume_up)
   # Unmutes and increases volume, then displays the notification
@@ -95,5 +101,19 @@ brightness_down)
   # xbacklight -dec $brightness_step -time 0
   brightnessctl set 3%-
   show_brightness_notif
+  ;;
+
+kbd_brightness_up)
+  # Increases brightness and displays the notification
+  # xbacklight -inc $brightness_step -time 0
+  brightnessctl -d 'smc::kbd_backlight' set 3%+
+  show_brightness_notif kbd
+  ;;
+
+kbd_brightness_down)
+  # Decreases brightness and displays the notification
+  # xbacklight -dec $brightness_step -time 0
+  brightnessctl -d 'smc::kbd_backlight' set 3%-
+  show_brightness_notif kbd
   ;;
 esac
