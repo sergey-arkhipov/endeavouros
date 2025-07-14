@@ -174,7 +174,6 @@ bindsym $mod+r mode "resize"
 # start a terminal
 # bindsym $mod+Return exec --no-startup-id xfce4-terminal
 bindsym $mod+Return exec --no-startup-id alacritty --working-directory $(xcwd) 
-# bindsym $mod+Return exec --no-startup-id alacritty 
 
 # kill focused window
 bindsym $mod+q kill
@@ -297,6 +296,12 @@ bindsym $mod+p exec --no-startup-id /usr/local/bin/switch-audio-port
 bindsym $mod+w exec --no-startup-id /usr/bin/firefox
 bindsym $mod+n exec --no-startup-id /usr/bin/thunar
 bindsym Print exec --no-startup-id scrot ~/%Y-%m-%d-%T-screenshot.png && notify-send "Screenshot saved to ~/$(date +"%Y-%m-%d-%T")-screenshot.png"
+# bindsym Shift+Print exec --no-startup-id scrot -s -f -e 'xclip -selection clipboard $f -t image/png'
+
+## Clipboard Screenshots
+# bindsym Ctrl+Print exec --no-startup-id maim | xclip -selection clipboard -t image/png
+# bindsym Ctrl+$mod+Print exec --no-startup-id maim --window $(xdotool getactivewindow) | xclip -selection clipboard -t image/png
+bindsym Shift+Print exec --no-startup-id maim --select | xclip -selection clipboard -t image/png
 
 # Power Profiles menu switcher (rofi)
 bindsym $mod+Shift+p exec --no-startup-id ~/.config/i3/scripts/power-profiles
@@ -472,6 +477,7 @@ for_window [class="Blueberry.py" instance="blueberry.py"] floating enable
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
 for_window [class="Pamac-manager"] floating enable
 for_window [window_role="About"] floating enable
+for_window [class="Alacritty" title="btop"] floating enable
 
 # set border of floating window
 for_window [class="urxvt"] border pixel 1
@@ -516,28 +522,28 @@ client.urgent		    	$urgentred	$urgentred	$white		$yellowbrown	$yellowbrown
 bar {
 		font pango: Noto Sans Regular 10
 		status_command i3blocks -c ~/.config/i3/i3blocks.conf
-	    	position top
+	  position top
 #	    	i3bar_command i3bar --transparency
 # it could be that you have no primary display set: set one (xrandr --output <output> --primary)
 # reference: https://i3wm.org/docs/userguide.html#_tray_output
-	    	#tray_output primary
-	    	tray_padding 5
-
+    tray_output primary
+    tray_padding 10
+    padding 5 5 5 5
+    separator_symbol ' '
 # When strip_workspace_numbers is set to yes,
 # any workspace that has a name of the form
 # “[n][:][NAME]” will display only the name.
 		strip_workspace_numbers yes
-##strip_workspace_name no
-
-		    colors {
+# strip_workspace_name no
+		colors {
 		    separator          $purple
 		    background         $darkgrey
 		    statusline         $white
-#                          		border 		        bg		txt		indicator
-		focused_workspace	$mediumgrey	   	$grey		$darkgrey	$purple
-		active_workspace	$lightblue      	$mediumgrey	$darkgrey	$purple
-		inactive_workspace	$darkgrey   		$darkgrey	$grey		$purple
-		urgent_workspace	$urgentred	    	$urgentred	$white		$purple
+#    		border 		        bg		txt		indicator
+				focused_workspace	$mediumgrey	   	$grey		$darkgrey	$purple
+				active_workspace	$lightblue      	$mediumgrey	$darkgrey	$purple
+				inactive_workspace	$darkgrey   		$darkgrey	$grey		$purple
+				urgent_workspace	$urgentred	    	$urgentred	$white		$purple
 	}
 }
 
@@ -608,5 +614,15 @@ bindsym $mod+Shift+minus move scratchpad
 # Show the first scratchpad window
 bindsym $mod+minus scratchpad show
 
-# Show the sup-mail scratchpad window, if any.
-#bindsym mod4+s [title="^Sup ::"] scratchpad show
+# bindsym Shift+F1 input type:touchpad events toggle enabled disabled
+bindsym Shift+F1 exec --no-startup-id ~/.config/i3/scripts/toggle_touchpad
+
+set $screencast bash ~/.config/i3/scripts/screencast
+bindsym $mod+Shift+s exec $screencast
+
+bindsym Ctrl+Print exec ~/.config/i3/scripts/record_screen.sh toggle
+
+# bindsym XF86Display exec --no-startup-id ~/.config/i3/scripts/toggle_display.sh
+# Переключение между дисплеями (если используете toggle скрипт)
+bindsym $mod+Shift+d exec --no-startup-id ~/.config/i3/scripts/toggle_display.sh
+
