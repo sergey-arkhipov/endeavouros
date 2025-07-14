@@ -46,10 +46,10 @@ close(MPSTAT);
 $cpu_usage eq -1 and die 'Can\'t find CPU information';
 
 # Print short_text, full_text
-print "${label}";
-printf "%02.${decimals}f%%\n", $cpu_usage;
-print "${label}";
-printf "%02.${decimals}f%%\n", $cpu_usage;
+print " ${label}";
+printf "  %02.${decimals}f%%\n", $cpu_usage;
+print "{label}";
+printf "  %02.${decimals}f%%\n", $cpu_usage;
 
 # Print color, if needed
 if ($cpu_usage >= $t_crit) {
@@ -57,6 +57,12 @@ if ($cpu_usage >= $t_crit) {
     exit 33;
 } elsif ($cpu_usage >= $t_warn) {
     print "#FFFC00\n";
+}
+
+# Левый клик выводит btop в плавающем окне
+
+if ($ENV{BLOCK_BUTTON} && $ENV{BLOCK_BUTTON} == 1) {
+    system("alacritty -T btop -e btop &");
 }
 
 exit 0;
