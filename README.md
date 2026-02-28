@@ -184,3 +184,8 @@ docker run -p 9000:9000 -p 9001:9001 -d --restart unless-stopped --name minio \
 quay.io/minio/minio server /data --console-address ":9001"
 
 ```
+
+### Fixes
+
+- /usr/share/endeavouros/scripts/eos-script-lib-yad
+  Fix for notify all users when sway.
