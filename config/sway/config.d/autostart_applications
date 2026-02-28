@@ -14,11 +14,10 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
 # Тестовый конфиг (20 секунд)
 set $lock_screen swaylock -c 000000 --ring-color 7f3fbf --inside-color 000000 --show-keyboard-layout --indicator-radius 100
 exec swayidle -w \
-    timeout 300 '$lock_screen' \
+    timeout 300 'swaymsg lock' \
     timeout 360 'swaymsg "output * dpms off"' \
-    timeout 600 'systemctl suspend' \
     resume 'swaymsg "output * dpms on"' \
-    before-sleep '$lock_screen' \
+    before-sleep 'swaymsg lock' \
     lock '$lock_screen'
 #
 bindswitch lid:on exec $lock_screen
