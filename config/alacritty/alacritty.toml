@@ -7,6 +7,7 @@ import = [
 ]
 
 [font]
+# size = 8
 size = 10
 
 [font.offset]
@@ -26,16 +27,23 @@ family = "FiraCode Nerd Font"
 style = "Italic"
 
 [window]
-decorations = "Full"
-option_as_alt = "OnlyLeft"
+decorations = "None"
+option_as_alt = "Both"
 dynamic_padding = true
 opacity = 0.95
-dimensions = {}
-padding = {}
+
+# Правильная вложенность для паддингов:
+[window.padding]
+x = 10  # Поставь побольше (например, 20), чтобы сразу увидеть результат
+y = 10
+
+[window.dimensions]
+columns = 0
+lines = 0
 
 [window.position]
-x = 0
-y = 0
+x = 5
+y = 5
 
 [terminal]
 osc52 = "CopyPaste"
@@ -75,7 +83,7 @@ save_to_clipboard = true
 [cursor]
 style = "Beam"
 unfocused_hollow = false
-thickness = 0.1
+thickness = 0.2
 
 [colors.primary]
 background = "0x282828"
@@ -107,3 +115,23 @@ persist = false
 mouse = { enabled = true, mods = "Control" }
 binding = { key = "G", mods = "Control|Shift" }
 regex = "(~?\\/?[^\\s<>\"\\']*\\.[a-zA-Z0-9]+)\\s*$|(\\/\\.[^\\s<>\"]*\\.[a-zA-Z0-9]+)\\s*$|'([[:print:] ]*\\.\\w+)'"
+# Тема Gruvbox Dark
+# [colors.normal]
+# black = "0x282828"
+# red = "0xcc241d"
+# green = "0x98971a"
+# yellow = "0xd79921"
+# blue = "0x458588"
+# magenta = "0xb16286"
+# cyan = "0x689d6a"
+# white = "0xa89984"
+#
+# [colors.bright]
+# black = "0x928374"
+# red = "0xfb4934"
+# green = "0xb8bb26"
+# yellow = "0xfabd2f"
+# blue = "0x83a598"
+# magenta = "0xd3869b"
+# cyan = "0x8ec07c"
+# white = "0xebdbb2"
