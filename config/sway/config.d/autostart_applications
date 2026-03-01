@@ -12,15 +12,19 @@ exec hash dbus-update-activation-environment 2>/dev/null && \
 # exec swayidle idlehint 1
 # exec_always swayidle -w before-sleep "gtklock -d"
 # Тестовый конфиг (20 секунд)
+# set $lock_screen swaylock -c 000000 --ring-color 7f3fbf --inside-color 000000 --show-keyboard-layout --indicator-radius 100
 set $lock_screen swaylock -c 000000 --ring-color 7f3fbf --inside-color 000000 --show-keyboard-layout --indicator-radius 100
+
 exec swayidle -w \
-    timeout 300 'swaymsg lock' \
-    timeout 360 'swaymsg "output * dpms off"' \
-    resume 'swaymsg "output * dpms on"' \
-    before-sleep 'swaymsg lock' \
-    lock '$lock_screen'
+     timeout 300 'swaylock -f --color 111111 --show-keyboard-layout --indicator-caps-lock --indicator-radius 100' \
+     timeout 400 'swaymsg "output * power off"' \
+     resume 'swaymsg "output * power on"' \
+     before-sleep 'swaylock -f --color 111111 --show-keyboard-layout --indicator-caps-lock --indicator-radius 100'
+
+# exec_always swayidle -w before-sleep "$lock_screen"
+
 #
-bindswitch lid:on exec $lock_screen
+# bindswitch lid:on exec $lock_screen
 # Desktop notifications
 exec mako
 
