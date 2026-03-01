@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# Имена модулей (проверь через lsmod, если не заведется)
+WIFI_DRIVER="wl"
+BT_DRIVER="btbcm"
+
+case $1/$2 in
+  pre/*)
+    echo "Подготовка к сну: выключаем сеть и BT..."
+    systemctl stop NetworkManager
+    systemctl stop bluetooth
+
+    # Выгружаем модули в обратном порядке
+    modprobe -r $WIFI_DRIVER
+    modprobe -r $BT_DRIVER
+    ;;
+  post/*)
+    echo "Просыпание: инициализация железа..."
+    # Загружаем модули обратно
+    modprobe $BT_DRIVER
+    modprobe $WIFI_DRIVER
+
+    # Даем железу 2 секунды "прийти в себя"
+    sleep 2
+
+    systemctl start bluetooth
+    systemctl start NetworkManager
+    ;;
+esac
