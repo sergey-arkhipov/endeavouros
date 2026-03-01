@@ -1,0 +1,9 @@
+[Unit]
+Description=Disable wifi before sleep so it doesn't freak out
+Before=suspend.target
+[Service]
+Type=oneshot
+ExecStart=-/usr/bin/rmmod brcmfmac_wcc 
+ExecStart=-/usr/bin/rmmod brcmfmac
+[Install]
+WantedBy=suspend.target

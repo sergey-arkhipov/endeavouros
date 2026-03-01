@@ -1,0 +1,9 @@
+[Unit]
+Description=Enable wifi after sleep so it doesn't freak out
+After=suspend.target
+
+[Service]
+ExecStart=/usr/bin/modprobe brcmfmac
+
+[Install]
+WantedBy=suspend.target
