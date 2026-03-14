@@ -1,0 +1,140 @@
+{
+  "layer": "top",
+  "position": "top",
+  "spacing": 2,
+
+  "modules-left": ["custom/launcher", "hyprland/workspaces", "hyprland/window"],
+
+  "custom/launcher": {
+    "format": "<span size='x-large'></span>",
+    "on-click": "nwg-drawer",
+    "tooltip": false
+  },
+
+  "hyprland/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "active-only": false,
+    "on-click": "activate",
+    "format": "{id}",
+    "persistent-workspaces": {}
+  },
+
+  "hyprland/window": {
+    "format": "{}",
+    "max-length": 120,
+    "separate-outputs": true
+  },
+
+  "modules-center": ["network"],
+
+  "network": {
+    "format-wifi": "   {essid}",
+    "tooltip-format-wifi": "{bandwidthDownBits:>} 󰶡 {bandwidthUpBits:>} 󰶣",
+    "format-ethernet": "󰈀 {bandwidthDownBits:>} 󰶡 {bandwidthUpBits:>} 󰶣",
+    "format-disconnected": " Disconnected",
+    "on-click": "networkmanager_dmenu",
+    "interval": 2
+  },
+
+  "modules-right": [
+    "custom/recorder",
+    "hyprland/language",
+    "idle_inhibitor",
+    "cpu",
+    "backlight",
+    "pulseaudio",
+    "temperature",
+    "battery",
+    "clock",
+    "tray",
+    "custom/power"
+  ],
+
+  "hyprland/language": {
+    "format": "{}",
+    "format-ru": "\ud83c\uddf7\ud83c\uddfa",
+    "format-en": "\ud83c\uddfa\ud83c\uddf8",
+    "on-click": "hyprctl switchxkblayout current next",
+    "keyboard-name": "apple-inc.-apple-internal-keyboard-/-trackpad"
+  },
+
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    }
+  },
+
+  "cpu": {
+    "interval": 5,
+    "format": " {usage:>3}%",
+    "on-click": "alacritty -e btop"
+  },
+
+  "backlight": {
+    "format": "{icon} {percent}%",
+    "format-icons": ["󰄰", "󰪞", "󰪟", "󰪠", "󰪡", "󰪢", "󰪣", "󰪤", "󰪥"],
+    "on-scroll-down": "brightnessctl set 5%-",
+    "on-scroll-up": "brightnessctl set +5%"
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰝟 muted",
+    "format-icons": {
+      "default": ["󰕿", "󰖀", "󰕾"]
+    },
+    "on-click": "pavucontrol"
+  },
+
+  "battery": {
+    "states": { "warning": 30, "critical": 15 },
+    "format": "{icon} {capacity}%",
+    "format-charging": " {capacity}%",
+    "format-icons": ["", "", "", "", ""],
+    "interval": 5
+  },
+
+  "clock": {
+    "format": "󰅐 {:%H:%M}",
+    "format-alt": "󰅐 {:%a %d %b %H:%M}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "month",
+      "on-scroll": 1,
+      "format": {
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+      }
+    }
+  },
+
+  "tray": {
+    "icon-size": 16,
+    "spacing": 10
+  },
+
+  "custom/power": {
+    "format": "⏻",
+    "on-click": "~/.config/hypr/scripts/power_menu.sh",
+    "tooltip": false
+  },
+
+  "temperature": {
+    "thermal-zone": 1,
+    "hwmon-path": "/sys/class/hwmon/hwmon1/temp1_input",
+    "critical-threshold": 80,
+    "format-critical": "{temperatureC}°C ",
+    "format": "{temperatureC}°C "
+  },
+
+  "custom/recorder": {
+    "format": "{}",
+    "return-type": "json",
+    "interval": 2, // Опрашиваем раз в 2 секунды для надежности
+    "exec": "if pgrep -x wf-recorder > /dev/null; then echo '{\"text\": \"󰑋\", \"class\": \"recording\", \"tooltip\": \"Идет запись...\"}'; else echo '{\"text\": \"󰑋\", \"class\": \"stopped\"}'; fi",
+    "on-click": "~/.local/bin/record-script.sh",
+    "signal": 8
+  }
+}

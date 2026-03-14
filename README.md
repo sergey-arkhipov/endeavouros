@@ -189,3 +189,15 @@ quay.io/minio/minio server /data --console-address ":9001"
 
 - /usr/share/endeavouros/scripts/eos-script-lib-yad
   Fix for notify all users when sway.
+
+## Hyprland setup
+
+```bash
+
+config/hypr/hyprland.conf
+config/hypr/hypridle.conf
+config/hypr/hyprlock.conf
+config/hypr/scripts/
+config/waybar/config-hypr.json
+config/waybar/style-hypr.css
+```
