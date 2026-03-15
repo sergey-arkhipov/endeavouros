@@ -201,3 +201,26 @@ config/hypr/scripts/
 config/waybar/config-hypr.json
 config/waybar/style-hypr.css
 ```
+
+### hyprland.conf
+
+Настройки хранятся в одном файле hyprland.conf
+
+```bash
+ls -1  ~/.config/hypr/
+hypridle.conf
+hyprland.conf
+hyprlock.conf
+scripts
+```
+
+Основные блоки настроек
+
+- монитор
+- программы по умолчанию (терминал, файловый менеджер)
+- автозапуск программ
+- переменные окружения сессии
+- настройка эффектов и внешнего вида
+- настройка инпутов (keyboard, mouse)
+- горячие клавиши управления (keybinding)
+- настройка окон и воркспейов (поведение, привязка программ и т.д)
