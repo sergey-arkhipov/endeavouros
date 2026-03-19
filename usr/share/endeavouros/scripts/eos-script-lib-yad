@@ -318,7 +318,10 @@ eos_notification() {   # sending notification to the current user
 }
 
 eos_notification_all() {   # sending notification to all users
-    eos_GetUsers() { /usr/bin/users | sed 's| |\n|g' | sort -u ; }
+    # eos_GetUsers() { /usr/bin/users | sed 's| |\n|g' | sort -u ; }
+    eos_GetUsers() {
+        loginctl list-users --no-legend | awk '{print $2}'
+    }
 
     local icon="$1"
     local urgency="$2"        # low, normal, critical
@@ -679,7 +682,7 @@ eos_yad__detectDE()
 
     if [ "$_desktop_" = "" ]; then
       # fallback to uname output for other platforms
-      case "$(uname 2>/dev/null)" in 
+      case "$(uname 2>/dev/null)" in
         CYGWIN*)  _desktop_=cygwin ;;
         Darwin)   _desktop_=darwin ;;
       esac
@@ -998,7 +1001,7 @@ GetPager() {                                          # return a pager out of so
 
 GetCacheDir() {
     local pconfcachedir=$(grep "^[ ]*CacheDir[ ]*=" /etc/pacman.conf | tail -n1)
-    
+
     if [ "$pconfcachedir" ] ; then
         pconfcachedir=$(echo "$pconfcachedir" | sed -E 's|^[ ]*CacheDir[ ]*=[ ]*(.*)|\1|')
         echo "$pconfcachedir"
