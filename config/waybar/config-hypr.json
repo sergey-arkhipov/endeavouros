@@ -136,5 +136,23 @@
     "exec": "if pgrep -x wf-recorder > /dev/null; then echo '{\"text\": \"󰑋\", \"class\": \"recording\", \"tooltip\": \"Идет запись...\"}'; else echo '{\"text\": \"󰑋\", \"class\": \"stopped\"}'; fi",
     "on-click": "~/.local/bin/record-script.sh",
     "signal": 8
+  },
+  "custom/power-mode": {
+    "format": "{}", // берёт text из JSON
+    "return-type": "json",
+    "exec": "~/.config/waybar/scripts/power-mode.sh", // просто для отображения
+    "interval": 30, // обновление каждые 30 сек
+    "on-click": "~/.config/waybar/scripts/power-mode.sh set",
+    "signal": 9, // сигнал для мгновенного обновления после смены
+    "tooltip": true
+  },
+  "custom/touchpad": {
+    "exec": "~/.config/hypr/scripts/touchpad-status.sh",
+    "on-click": "~/.config/hypr/scripts/toggle-touchpad.sh",
+    "interval": 2,
+    "signal": 1,
+    "format": "{}",
+    "tooltip": false,
+    "return-type": "json"
   }
 }
