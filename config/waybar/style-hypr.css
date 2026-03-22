@@ -306,3 +306,29 @@ window#waybar #language {
   color: #94e2d5;
   font-size: 20px;
 }
+
+/* Цвета по классам — теперь иконки будут цветными */
+#custom-power-mode.power-saver {
+  color: #2ecc71; /* ярко-зелёный — для энергосбережения/листа */
+}
+
+#custom-power-mode.balanced {
+  color: #f1c40f; /* жёлто-оранжевый — баланс */
+  /* или #3498db синий, если хочешь спокойнее */
+}
+
+#custom-power-mode.performance {
+  color: #e74c3c; /* красный — для молнии/performance */
+}
+
+/* Опционально: hover эффект */
+#custom-power-mode:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+#custom-touchpad.enabled {
+  color: #00ff00;
+}
+#custom-touchpad.disabled {
+  color: #e74c3c;
+}
