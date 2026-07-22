@@ -38,6 +38,8 @@ hl.on("hyprland.start", function()
 		"systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP HYPRLAND_INSTANCE_SIGNATURE DISPLAY"
 	)
 	hl.exec_cmd("systemctl --user start hyprpolkitagent")
+	hl.exec_cmd("nm-applet --indicator")
+	hl.exec_cmd("blueman-applet")
 end)
 
 -- ============================================================================
